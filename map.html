@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="images/icon.gif">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet"  href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"> </script>
+  <link rel="stylesheet"  href="css/chorostyles.css">
+  <title>US Campus Crime</title>
+</head>
+<body>
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li><a href="index.html">About</a></li>
+      <li><a href="disclaimers.html">Disclaimers</a></li>
+      <li class="active"><a href="map.html">Map</a></li>
+    </ul>
+  <div class="row col-md-12">
+    <h1>Map</h1>
+    <p>632 campuses. 8,256,028 students. 150,124 crimes. See where they are.</p><!--idea: put all in own divs and width =  same as text. align left, fade in after each thing finishes fading in? see https://api.jquery.com/delay/-->
+<!--j query ideas: ​make page roll/slide out ​of tabs when you click on it; maybe an animation of exceptional states (3 highest, 3 lowest, maybe indiv schools too) on about page or st-->
+
+  </div>
+  <div class="row col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+    <div id="map"></div>
+  </div>
+  <script src="js/us-states.js"></script>
+  <script>
+var map = L.map('map').setView([37.8, -96], 4);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+maxZoom: 18,
+minZoom: 3,
+id: 'mapbox.light',
+accessToken: 'pk.eyJ1IjoiYWJhcmJhdCIsImEiOiJjaWgzbnMxejMweTkwd2NtNTA1bW93enZ6In0.W3JT2aiphbu-B3R716LxdA'
+}).addTo(map);
+L.geoJson(statesData).addTo(map);
+
+function getColor(d) {
+  return d == "N/A" ? '#cccccc' :
+         d > 40  ? '#045a8d' :
+         d > 30   ? '#2b8cbe' :
+         d > 20   ? '#74a9cf' :
+         d > 10   ? '#bdc9e1' :
+                    '#f1eef6';
+}
+
+function style(feature) {
+  return {
+      fillColor: getColor(feature.properties.crimePer1000),
+      weight: 2,
+      opacity: 1,
+      color: 'white',
+      dashArray: '3',
+      fillOpacity: 0.7
+  };
+}
+
+L.geoJson(statesData, {style: style}).addTo(map);
+
+
+function highlightFeature(e) {
+  var layer = e.target;
+
+  layer.setStyle({
+      weight: 5,
+      color: '#fff',
+      dashArray: '',
+      fillOpacity: 0.7
+  });
+
+  if (!L.Browser.ie && !L.Browser.opera) {
+      layer.bringToFront();
+  }
+  info.update(layer.feature.properties);
+
+}
+function resetHighlight(e) {
+  geojson.resetStyle(e.target);
+  info.update();
+}
+var geojson;
+
+function zoomToFeature(e) {
+  map.fitBounds(e.target.getBounds());
+}
+function onEachFeature(feature, layer) {
+  layer.on({
+      mouseover: highlightFeature,
+      mouseout: resetHighlight,
+      click: zoomToFeature
+  });
+}
+
+geojson = L.geoJson(statesData, {
+  style: style,
+  onEachFeature: onEachFeature
+}).addTo(map);
+
+
+var info = L.control();
+
+info.onAdd = function (map) {
+  this._div = L.DomUtil.create('div', 'info');
+  this.update();
+  return this._div;
+};
+
+info.update = function (props) {
+  this._div.innerHTML = '<h4>Campus Crime</h4>' +  (props ?
+      '<h3><center>' + props.state + '</center></h3><p>' + props.numberCrimes + ' crimes</p><p>' + props.numberStudents + ' students</p><p>' + props.crimePer1000 + ' crimes/1000 students' : 'Hover over a state</p>');
+};
+
+info.addTo(map);
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+  var div = L.DomUtil.create('div', 'info legend'),
+      grades = [0, 10, 20, 30, 40],
+      labels = [];
+
+  for (var i = 0; i < grades.length; i++) {
+      div.innerHTML +=
+          '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+          grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+  }
+
+  return div;
+};
+
+legend.addTo(map);
+
+  </script>
+  <script src="js/actions.js"></script>
+  <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</div>
+</body>
+</html>
