@@ -34,7 +34,7 @@
 
   var map = L.map('map', {
     scrollWheelZoom: false,
-    worldCopyJump: true
+    worldCopyJump: true,
   }).setView([37.8, -96], 4);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -146,15 +146,21 @@ legend.onAdd = function (map) {
 legend.addTo(map);
 
 
+
 for (var i=0; i < schools.length; ++i) {
 var marker = L.marker([schools[i].lat, schools[i].lng])
-.bindPopup('<h3><center>' + schools[i].school + '</center></h3> <p>' + schools[i].numberCrimes + ' crimes</p> <p>' + schools[i].numberStudents + ' students</p> <p>' + schools[i].crimePer1000 + ' crimes per 1000 students</p>').addTo(map)};
+.bindPopup('<h3><center>' + schools[i].school + '</center></h3> <p>' + schools[i].numberCrimes + ' crimes</p> <p>' + schools[i].numberStudents + ' students</p> <p>' + schools[i].crimePer1000 + ' crimes per 1000 students</p>').addTo(map)}
 
 
-//var overlayMaps = {
-    //"Show schools": marker
-//  };
-//L.control.layers(overlayMaps).addTo(map);
+map.on('zoomend', function() {
+    if (map.getZoom() > 6) {
+        map.featureLayer.setFilter(function() { return true; });
+    } else {
+        map.featureLayer.setFilter(function() { return false; });
+    }
+});
+//THIS doesn't work for my map, on zoom it makes the markers act funny and makes tile layer disappear
+
 
 
   </script>
