@@ -15,16 +15,20 @@
   <div class="container">
     <ul class="nav nav-tabs">
       <li><a href="index.html">About</a></li>
-      <li><a href="disclaimers.html">Disclaimers</a></li>
       <li class="active"><a href="map.html">Map</a></li>
+      <li><a href="states.html">States</a></li> <!--this will be the jQuery page. might change name of tab and page-->
+
     </ul>
   <div class="row col-md-12">
     <h1>Map</h1>
-    <p>632 campuses. 8,256,028 students. 150,124 crimes. See where they are.</p><!--idea: put all in own divs and width =  same as text. align left, fade in after each thing finishes fading in? see https://api.jquery.com/delay/-->
+    <p>632 campuses. 8,256,028 students. 150,124 crimes. See where they are.</p>
+    <p>Click a state to see its schools. Click a marker to see individual statistics.</p>
+
+      <!--idea: put all in own divs and width =  same as text. align left, fade in after each thing finishes fading in? see https://api.jquery.com/delay/-->
 <!--j query ideas: ​make page roll/slide out ​of tabs when you click on it; maybe an animation of exceptional states (3 highest, 3 lowest, maybe indiv schools too) on about page or st-->
 
   </div>
-  <div class="row col-md-12 col-lg-10 col-lg-offset-1">
+  <div class="row col-md-12 col-lg-12">
     <div id="map"></div>
   </div>
   <script src="js/us-states.js"></script>
@@ -46,6 +50,11 @@ accessToken: 'pk.eyJ1IjoiYWJhcmJhdCIsImEiOiJjaWgzbnMxejMweTkwd2NtNTA1bW93enZ6In0
 }).addTo(map);
 
 
+var markerIcon = L.icon({
+    iconUrl: 'images/marker.png',
+
+    iconSize:     [20, 30], // size of the icon
+});
 
 
 function getColor(d) {
@@ -121,7 +130,7 @@ info.onAdd = function (map) {
 
 info.update = function (props) {
   this._div.innerHTML = '<h4>Campus Crime</h4>' +  (props ?
-      '<h3><center>' + props.state + '</center></h3><p>' + props.numberCrimes + ' crimes</p><p>' + props.numberStudents + ' students</p><p>' + props.crimePer1000 + ' crimes/1000 students' : 'Hover over a state</p>');
+      '<h3><center>' + props.state + '</center></h3><p class="popup">' + props.numberCrimes + ' crimes</p><p class="popup">' + props.numberStudents + ' students</p><p class="popup">' + props.crimePer1000 + ' crimes/1000 students' : 'Hover over a state</p>');
 };
 
 info.addTo(map);
@@ -134,6 +143,7 @@ legend.onAdd = function (map) {
       grades = [0, 10, 20, 30, 40],
       labels = [];
 
+
   for (var i = 0; i < grades.length; i++) {
       div.innerHTML +=
           '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
@@ -145,21 +155,45 @@ legend.onAdd = function (map) {
 
 legend.addTo(map);
 
+//Alaska schools
+var marker1 = L.marker([61.1899, -149.827], {icon: markerIcon}).addTo(map);
+marker1.bindPopup('<h3><center>University of Alaska: Anchorage</center></h3> <p class="popup">178 crimes</p> <p class="popup">17,363 students</p> <p class="popup">10.25 crimes per 1,000 students</p>');
+
+var marker2 = L.marker([64.858432, -147.823153], {icon: markerIcon}).addTo(map);
+marker2.bindPopup('<h3><center>University of Alaska: Fairbanks</center></h3> <p class="popup">120 crimes</p> <p class="popup">9,166 students</p> <p class="popup">13.09 crimes per 1,000 students</p>');
 
 
-for (var i=0; i < schools.length; ++i) {
-var marker = L.marker([schools[i].lat, schools[i].lng])
-.bindPopup('<h3><center>' + schools[i].school + '</center></h3> <p>' + schools[i].numberCrimes + ' crimes</p> <p>' + schools[i].numberStudents + ' students</p> <p>' + schools[i].crimePer1000 + ' crimes per 1000 students</p>').addTo(map)}
+
+var markers = new L.layerGroup();
+
+function populate() {
+  for (var i=0; i < schools.length; ++i) {
+    var marker = L.marker([schools[i].lat, schools[i].lng], {icon: markerIcon})
+    .bindPopup('<h3><center>' + schools[i].school + '</center></h3><br>' + schools[i].numberCrimes + ' crimes<br>' + schools[i].numberStudents + ' students<br>' + schools[i].crimePer1000 + ' crimes per 1,000 students').addTo(map);
+    markers.addLayer(marker);
+  }
+  return false;
+}
 
 
-map.on('zoomend', function() {
-    if (map.getZoom() > 6) {
-        map.featureLayer.setFilter(function() { return true; });
-    } else {
-        map.featureLayer.setFilter(function() { return false; });
-    }
+function addMarkers(){
+    map.addLayer(markers);
+    populate();
+}
+function removeMarkers(){
+    map.removeLayer(markers);
+}
+
+
+map.on('zoomend', function () {
+  if (map.getZoom() >= 6 && map.hasLayer(markers) == false) {
+    addMarkers();
+  } else if (map.getZoom() < 6 && map.hasLayer(markers)) {
+  removeMarkers();
+  }
 });
-//THIS doesn't work for my map, on zoom it makes the markers act funny and makes tile layer disappear
+
+
 
 
   </script>

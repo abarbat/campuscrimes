@@ -38,7 +38,11 @@
   width: 100px;
   height:200px;
   z-index: 100;
+}
 
+.popup {
+  margin: 0;
+  padding: 0;
 }
 
 #map {
