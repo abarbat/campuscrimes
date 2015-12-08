@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="images/icon.gif">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet"  href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"> </script>
-  <link rel="stylesheet"  href="css/chorostyles.css">
+  <link rel="stylesheet" href="css/chorostyles.css">
+
   <title>US Campus Crime</title>
 </head>
 <body>
@@ -21,8 +22,8 @@
     </ul>
   <div class="row col-md-12">
     <h1>Map</h1>
-    <p>632 campuses. 8,256,028 students. 150,124 crimes. See where they are.</p>
-    <p>Click a state to see its schools. Click a marker to see individual statistics.</p>
+    <p><span id="campus">632 campuses.</span> <span id="student">8,256,028 students.</span> <span id="crime">150,124 crimes.</span> <span id="where">See where they are.</span></p>
+    <p id="final">Click a state to see its schools. Click a marker to see individual statistics.</p>
 
       <!--idea: put all in own divs and width =  same as text. align left, fade in after each thing finishes fading in? see https://api.jquery.com/delay/-->
 <!--j query ideas: ​make page roll/slide out ​of tabs when you click on it; maybe an animation of exceptional states (3 highest, 3 lowest, maybe indiv schools too) on about page or st-->
@@ -31,10 +32,15 @@
   <div class="row col-md-12 col-lg-12">
     <div id="map"></div>
   </div>
+
+
   <script src="js/us-states.js"></script>
   <script src="js/schools.json"></script>
 
   <script>
+  $(document).ready(function(){
+    alert( "ready!" );
+});
 
   var map = L.map('map', {
     scrollWheelZoom: false,
@@ -197,7 +203,6 @@ map.on('zoomend', function () {
 
 
   </script>
-  <script src="js/actions.js"></script>
   <script src="js/jquery-2.1.4.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 </div>
