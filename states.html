@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="images/icon.gif">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <script src="js/jquery-2.1.4.min.js"> </script>
+  <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
   <title>US Campus Crime</title>
@@ -18,184 +19,227 @@
       <li><a href="map.html">Map</a></li>
       <li class="active"><a href="#">States</a></li>
     </ul>
+
     <div class="row col-md-8 col-lg-8 col-xl-8">
       <h1>Crimes by State</h1>
       <p>Choose a state to see a breakdown of its campus crime.</p>
     </div>
-    <div id="small" class="row col-sm-6 col-md-6 col-lg-6 col-xl-6">
-      <!--how can i make the big area move to here when you resize??-->
 
-    </div>
     <div class="clearfix"></div>
-    <div class="row col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <ul class="statelist">
-        <li class="statename" id="Alabama">Alabama</li>
-        <li class="statename" id="Alaska">Alaska</li>
-        <li class="statename" id="Arizona">Arizona</li>
-        <li class="statename" id="Arkansas">Arkansas</li>
-        <li class="statename" id="California">California</li>
-        <li class="statename" id="Colorado">Colorado</li>
-        <li class="statename" id="Connecticut">Connecticut</li>
-        <li class="statename" id="Delaware">Delaware</li>
-        <li class="statename" id="Florida">Florida</li>
-        <li class="statename" id="Georgia">Georgia</li>
-        <li class="statename" id="Hawaii">Hawaii</li>
-        <li class="statename" id="Idaho">Idaho</li>
-        <li class="statename" id="Illinois">Illinois</li>
-        <li class="statename" id="Indiana">Indiana</li>
-        <li class="statename" id="Iowa">Iowa</li>
-        <li class="statename" id="Kansas">Kansas</li>
-        <li class="statename" id="Kentucky">Kentucky</li>
-        <li class="statename" id="Louisiana">Louisiana</li>
-        <li class="statename" id="Maine">Maine</li>
-        <li class="statename" id="Maryland">Maryland</li>
-        <li class="statename" id="Massachusetts">Massachusetts</li>
-        <li class="statename" id="Michigan">Michigan</li>
-        <li class="statename" id="Minnesota">Minnesota</li>
-        <li class="statename" id="Mississippi">Mississippi</li>
-        <li class="statename" id="Missouri">Missouri</li>
-      </ul>
-    </div>
-    <div class="row col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <ul class="statelist">
-        <li class="statename" id="Montana">Montana</li>
-        <li class="statename" id="Nebraska">Nebraska</li>
-        <li class="statename" id="Nevada">Nevada</li>
-        <li class="statename" id="NewHampshire">New Hampshire</li>
-        <li class="statename" id="NewJersey">New Jersey</li>
-        <li class="statename" id="NewMexico">New Mexico</li>
-        <li class="statename" id="NewYork">New York</li>
-        <li class="statename" id="NorthCarolina">North Carolina</li>
-        <li class="statename" id="NorthDakota">North Dakota</li>
-        <li class="statename" id="Ohio">Ohio</li>
-        <li class="statename" id="Oklahoma">Oklahoma</li>
-        <li class="statename" id="Oregon">Oregon</li>
-        <li class="statename" id="Pennsylvania">Pennsylvania</li>
-        <li class="statename" id="">Rhode Island</li>
-        <li class="statename" id="RhodeIsland">South Carolina </li>
-        <li class="statename" id="SouthDakota">South Dakota</li>
-        <li class="statename" id="Tennessee">Tennessee</li>
-        <li class="statename" id="Texas">Texas</li>
-        <li class="statename" id="Utah">Utah</li>
-        <li class="statename" id="Vermont">Vermont</li>
-        <li class="statename" id="Virginia">Virginia</li>
-        <li class="statename" id="Washington">Washington</li>
-        <li class="statename" id="WestVirginia">West Virginia</li>
-        <li class="statename" id="Wisconsin">Wisconsin</li>
-        <li class="statename" id="Wyoming">Wyoming</li>
-      </ul>
-    </div>
-    <div id="big" class="row col-sm-12 col-md-12 col-lg-6 col-xl-6">
-      <div id="chartarea">
-        <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
-      <p>*Percentages for "Rape" category reflect the combined values for legacy and revised definitions of rape. See <a href="index.html#definitions">Disclaimers</a> for further explanation.</p>
-      <!--put the same info as earlier in here! also make it invisible before you click, a la trollhouse-->
+    <div id="left">
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select a state <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li class="statename" id="Alabama"><a href="#">Alabama</a></li>
+          <li class="statename" id="Alaska"><a href="#">Alaska</a></li>
+          <li class="statename" id="Arizona"><a href="#">Arizona</a></li>
+          <li class="statename" id="Arkansas"><a href="#">Arkansas</a></li>
+          <li class="statename" id="California"><a href="#">California</a></li>
+          <li class="statename" id="Colorado"><a href="#">Colorado</a></li>
+          <li class="statename" id="Connecticut"><a href="#">Connecticut</a></li>
+          <li class="statename" id="Delaware"><a href="#">Delaware</a></li>
+          <li class="statename" id="Florida"><a href="#">Florida</a></li>
+          <li class="statename" id="Georgia"><a href="#">Georgia</a></li>
+          <li class="statename" id="Hawaii"><a href="#">Hawaii</a></li>
+          <li class="statename" id="Idaho"><a href="#">Idaho</a></li>
+          <li class="statename" id="Illinois"><a href="#">Illinois</a></li>
+          <li class="statename" id="Indiana"><a href="#">Indiana</a></li>
+          <li class="statename" id="Iowa"><a href="#">Iowa</a></li>
+          <li class="statename" id="Kansas"><a href="#">Kansas</a></li>
+          <li class="statename" id="Kentucky"><a href="#">Kentucky</a></li>
+          <li class="statename" id="Louisiana"><a href="#">Louisiana</a></li>
+          <li class="statename" id="Maine"><a href="#">Maine</a></li>
+          <li class="statename" id="Maryland"><a href="#">Maryland</a></li>
+          <li class="statename" id="Massachusetts"><a href="#">Massachusetts</a></li>
+          <li class="statename" id="Michigan"><a href="#">Michigan</a></li>
+          <li class="statename" id="Minnesota"><a href="#">Minnesota</a></li>
+          <li class="statename" id="Mississippi"><a href="#">Mississippi</a></li>
+          <li class="statename" id="Missouri"><a href="#">Missouri</a></li>
+          <li class="statename" id="Montana"><a href="#">Montana</a></li>
+          <li class="statename" id="Nebraska"><a href="#">Nebraska</a></li>
+          <li class="statename" id="Nevada"><a href="#">Nevada</a></li>
+          <li class="statename" id="NewHampshire"><a href="#">New Hampshire</a></li>
+          <li class="statename" id="NewJersey"><a href="#">New Jersey</a></li>
+          <li class="statename" id="NewMexico"><a href="#">New Mexico</a></li>
+          <li class="statename" id="NewYork"><a href="#">New York</a></li>
+          <li class="statename" id="NorthCarolina"><a href="#">North Carolina</a></li>
+          <li class="statename" id="NorthDakota"><a href="#">North Dakota</a></li>
+          <li class="statename" id="Ohio"><a href="#">Ohio</a></li>
+          <li class="statename" id="Oklahoma"><a href="#">Oklahoma</a></li>
+          <li class="statename" id="Oregon"><a href="#">Oregon</a></li>
+          <li class="statename" id="Pennsylvania"><a href="#">Pennsylvania</a></li>
+          <li class="statename" id="RhodeIsland"><a href="#">Rhode Island</a></li>
+          <li class="statename" id="SouthCarolina"><a href="#">South Carolina </a></li>
+          <li class="statename" id="SouthDakota"><a href="#">South Dakota</a></li>
+          <li class="statename" id="Tennessee"><a href="#">Tennessee</a></li>
+          <li class="statename" id="Texas"><a href="#">Texas</a></li>
+          <li class="statename" id="Utah"><a href="#">Utah</a></li>
+          <li class="statename" id="Vermont"><a href="#">Vermont</a></li>
+          <li class="statename" id="Virginia"><a href="#">Virginia</a></li>
+          <li class="statename" id="Washington"><a href="#">Washington</a></li>
+          <li class="statename" id="WestVirginia"><a href="#">West Virginia</a></li>
+          <li class="statename" id="Wisconsin"><a href="#">Wisconsin</a></li>
+          <li class="statename" id="Wyoming"><a href="#">Wyoming</a></li>
+        </ul>
       </div>
+
+      <p id="addpadd">*Percentages for "Rape" category reflect the combined values for legacy and revised definitions of rape. See <a href="index.html#definitions">Disclaimers</a> for further explanation.</p>
+
     </div>
+
+    <div id="right">
+      <div id="container" style="width: 100%; height: 400px;"></div>
+      <p>
+        <!--check if highcharts has z index? floats? etc-->
+
+
+        <!--put the same info as earlier in here! also make it invisible before you click, a la trollhouse-->
+    </div>
+
   </div>
+
+
+
+
+
+
+
   <script type="text/javascript">
   $(document).ready(function() {
-      $("#chartarea").hide();
+    //setting up temporary variables for this exmaple
+    var stateName;
+    var rapeStat;
+    var robbStat;
+    var burgStat;
+    var propStat;
+    var aggrStat;
+    var murdStat;
+    var arsoStat;
+    var larcStat;
+    var motoStat;
+    var violStat;
 
-    Highcharts.getOptions().plotOptions.pie.colors = (function() {
-      var colors = [],
-        base = Highcharts.getOptions().colors[0],
-        i;
+    var chartStart = function() {
 
-      for (i = 0; i <= 10; i += 1) {
-        colors.push(Highcharts.Color(base).brighten((i - 7) / 7).get());
-      }
-      return colors;
-    }());
+      //highcharts color options
+      Highcharts.getOptions().plotOptions.pie.colors = (function() {
+        var colors = [],
+          base = Highcharts.getOptions().colors[0],
+          i;
 
-    var stateName = "Alabama";
-    var rapeStat = 19;
-    var robbStat = 12;
-    var burgStat = 149;
-    var propStat = 1621;
-    var aggrStat = 46;
-    var murdStat = 0;
-    var arsoStat = 0;
-    var larcStat = 1437;
-    var motoStat = 35;
-    var violStat = 77;
+        for (i = 0; i <= 10; i += 1) {
+          colors.push(Highcharts.Color(base).brighten((i - 7) / 7).get());
+        }
+        return colors;
+      }());
 
-
-
-    $('#container').highcharts({
-      chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-      },
-      title: {
-        text: 'Breakdown of campus crime: ' + stateName
-      },
-      tooltip: {
-        pointFormat: '{series.name}: <b>{point.y}</b>'
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: true,
-            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-            style: {
-              color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+      //starts highcharts
+      $('#container').highcharts({
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          type: 'pie'
+        },
+        title: {
+          text: 'Breakdown of campus crime: ' + stateName
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>{point.y}</b>'
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+              style: {
+                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+              }
             }
           }
-        }
-      },
-      series: [{
-        name: "Crime",
-        data: [{
-            name: 'Rape*',
-            y: rapeStat
-          }, {
-            name: 'Arson',
-            y: arsoStat
-          }, {
-            name: 'Robbery',
-            y: robbStat
-          }, {
-            name: 'Burglary',
-            y: burgStat
-          }, {
-            name: 'Property<br>crime',
-            y: propStat
-          }, {
-            name: 'Aggravated<br>assault',
-            y: aggrStat
-          }, {
-            name: 'Murder and<br>nonnegligent<br>manslaughter',
-            y: murdStat
-          }, {
-            name: 'Larceny-<br>theft',
-            y: larcStat
-          }, {
-            name: 'Motor vehicle <br>theft',
-            y: motoStat
-          }, {
-            name: 'Violent<br>crime',
-            y: violStat
-          }
+        },
+        exporting: {
+          enabled: false
+        },
+        series: [{
+          name: "Crime",
+          data: [{
+              name: 'Rape*',
+              y: rapeStat
+            }, {
+              name: 'Arson',
+              y: arsoStat
+            }, {
+              name: 'Robbery',
+              y: robbStat
+            }, {
+              name: 'Burglary',
+              y: burgStat
+            }, {
+              name: 'Property<br>crime',
+              y: propStat
+            }, {
+              name: 'Aggravated<br>assault',
+              y: aggrStat
+            }, {
+              name: 'Murder and<br>nonnegligent<br>manslaughter',
+              y: murdStat
+            }, {
+              name: 'Larceny-<br>theft',
+              y: larcStat
+            }, {
+              name: 'Motor vehicle<br>theft',
+              y: motoStat
+            }, {
+              name: 'Violent<br>crime',
+              y: violStat
+            }
 
-        ]
-      }]
+          ]
+        }]
+      });
+    };
+    //
+
+
+    $('#Alabama').click(function() {
+      stateName = "Alabama";
+      rapeStat = 19;
+      robbStat = 12;
+      burgStat = 149;
+      propStat = 1621;
+      aggrStat = 46;
+      murdStat = 0;
+      arsoStat = 0;
+      larcStat = 1437;
+      motoStat = 35;
+      violStat = 77;
+      chartStart();
+
+    })
+    $('#Georgia').click(function() {
+      stateName = "Georgia";
+      rapeStat = 123;
+      arsoStat = 3;
+      robbStat = 39;
+      burgStat = 277;
+      propStat = 3508;
+      aggrStat = 31;
+      murdStat = 0;
+      larcStat = 3152;
+      motoStat = 79;
+      violStat = 193;
+      chartStart();
+
+    })
     });
 
-    $(".statename").click(function(){
-      $("#chartarea").slideToggle();
 
-    });
-
-  // NOW IT WORKS PRETEND. GO BACK TO HERE TO MAKE IT KIND OF WORK
-
-
-  });
+  // WORKS FINE WITH 2 STATES PLUGGED IN MANUALLY
 
     </script>
 
@@ -204,29 +248,44 @@
 </body>
 
 <style>
-.statelist {
-  margin: 0;
-  padding-left:0;
-  list-style-type: none;
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
+
 .clearfix {
   clear: both;
 }
+
 .statename {
-  font-size: 1.4em;
-  cursor: pointer;
+  font-size: 1.2em;
 }
-#container {
-  width: 100%;
-}
-  #small {
+
+
+/*  #small {
     display: none;
-  }
-  #chartarea {
+  }*/
+
+#addpadd {
+  padding-top: 1em;
+}
+
+
+/*try floating chart on top*/
+
+@media (min-width:1000px) {
+  #left {
+    float: left;
     width: 40%;
     position: fixed;
   }
+  #right {
+    float: right;
+    width: 50%;
+  }
 }
+
 
 </style>
 </html>
