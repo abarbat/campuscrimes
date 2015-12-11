@@ -10,6 +10,7 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="js/crimes.json"></script>
   <title>US Campus Crime</title>
 </head>
 <body>
@@ -31,71 +32,67 @@
 
       <div class="btn-group">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select a state <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li class="statename" id="Alabama"><a href="#">Alabama</a></li>
-          <li class="statename" id="Alaska"><a href="#">Alaska</a></li>
-          <li class="statename" id="Arizona"><a href="#">Arizona</a></li>
-          <li class="statename" id="Arkansas"><a href="#">Arkansas</a></li>
-          <li class="statename" id="California"><a href="#">California</a></li>
-          <li class="statename" id="Colorado"><a href="#">Colorado</a></li>
-          <li class="statename" id="Connecticut"><a href="#">Connecticut</a></li>
-          <li class="statename" id="Delaware"><a href="#">Delaware</a></li>
-          <li class="statename" id="Florida"><a href="#">Florida</a></li>
-          <li class="statename" id="Georgia"><a href="#">Georgia</a></li>
-          <li class="statename" id="Hawaii"><a href="#">Hawaii</a></li>
-          <li class="statename" id="Idaho"><a href="#">Idaho</a></li>
-          <li class="statename" id="Illinois"><a href="#">Illinois</a></li>
-          <li class="statename" id="Indiana"><a href="#">Indiana</a></li>
-          <li class="statename" id="Iowa"><a href="#">Iowa</a></li>
-          <li class="statename" id="Kansas"><a href="#">Kansas</a></li>
-          <li class="statename" id="Kentucky"><a href="#">Kentucky</a></li>
-          <li class="statename" id="Louisiana"><a href="#">Louisiana</a></li>
-          <li class="statename" id="Maine"><a href="#">Maine</a></li>
-          <li class="statename" id="Maryland"><a href="#">Maryland</a></li>
-          <li class="statename" id="Massachusetts"><a href="#">Massachusetts</a></li>
-          <li class="statename" id="Michigan"><a href="#">Michigan</a></li>
-          <li class="statename" id="Minnesota"><a href="#">Minnesota</a></li>
-          <li class="statename" id="Mississippi"><a href="#">Mississippi</a></li>
-          <li class="statename" id="Missouri"><a href="#">Missouri</a></li>
-          <li class="statename" id="Montana"><a href="#">Montana</a></li>
-          <li class="statename" id="Nebraska"><a href="#">Nebraska</a></li>
-          <li class="statename" id="Nevada"><a href="#">Nevada</a></li>
-          <li class="statename" id="NewHampshire"><a href="#">New Hampshire</a></li>
-          <li class="statename" id="NewJersey"><a href="#">New Jersey</a></li>
-          <li class="statename" id="NewMexico"><a href="#">New Mexico</a></li>
-          <li class="statename" id="NewYork"><a href="#">New York</a></li>
-          <li class="statename" id="NorthCarolina"><a href="#">North Carolina</a></li>
-          <li class="statename" id="NorthDakota"><a href="#">North Dakota</a></li>
-          <li class="statename" id="Ohio"><a href="#">Ohio</a></li>
-          <li class="statename" id="Oklahoma"><a href="#">Oklahoma</a></li>
-          <li class="statename" id="Oregon"><a href="#">Oregon</a></li>
-          <li class="statename" id="Pennsylvania"><a href="#">Pennsylvania</a></li>
-          <li class="statename" id="RhodeIsland"><a href="#">Rhode Island</a></li>
-          <li class="statename" id="SouthCarolina"><a href="#">South Carolina </a></li>
-          <li class="statename" id="SouthDakota"><a href="#">South Dakota</a></li>
-          <li class="statename" id="Tennessee"><a href="#">Tennessee</a></li>
-          <li class="statename" id="Texas"><a href="#">Texas</a></li>
-          <li class="statename" id="Utah"><a href="#">Utah</a></li>
-          <li class="statename" id="Vermont"><a href="#">Vermont</a></li>
-          <li class="statename" id="Virginia"><a href="#">Virginia</a></li>
-          <li class="statename" id="Washington"><a href="#">Washington</a></li>
-          <li class="statename" id="WestVirginia"><a href="#">West Virginia</a></li>
-          <li class="statename" id="Wisconsin"><a href="#">Wisconsin</a></li>
-          <li class="statename" id="Wyoming"><a href="#">Wyoming</a></li>
+        <ul id="stateList" class="dropdown-menu">
+          <li><a class="statename" id="Alabama" href="#">Alabama</a></li>
+          <li><a class="statename" id="Alaska" href="#">Alaska</a></li>
+          <li><a class="statename" id="Arizona" href="#">Arizona</a></li>
+          <li><a class="statename" id="Arkansas" href="#">Arkansas</a></li>
+          <li><a class="statename" id="California" href="#">California</a></li>
+          <li><a class="statename" id="Colorado" href="#">Colorado</a></li>
+          <li><a class="statename" id="Connecticut" href="#">Connecticut</a></li>
+          <li><a class="statename" id="Delaware" href="#">Delaware</a></li>
+          <li><a class="statename" id="Florida" href="#">Florida</a></li>
+          <li><a class="statename" id="Georgia" href="#">Georgia</a></li>
+          <li><a class="statename" id="Illinois" href="#">Illinois</a></li>
+          <li><a class="statename" id="Indiana" href="#">Indiana</a></li>
+          <li><a class="statename" id="Iowa" href="#">Iowa</a></li>
+          <li><a class="statename" id="Kansas" href="#">Kansas</a></li>
+          <li><a class="statename" id="Kentucky" href="#">Kentucky</a></li>
+          <li><a class="statename" id="Louisiana" href="#">Louisiana</a></li>
+          <li><a class="statename" id="Maine" href="#">Maine</a></li>
+          <li><a class="statename" id="Maryland" href="#">Maryland</a></li>
+          <li><a class="statename" id="Massachusetts" href="#">Massachusetts</a></li>
+          <li><a class="statename" id="Michigan" href="#">Michigan</a></li>
+          <li><a class="statename" id="Minnesota" href="#">Minnesota</a></li>
+          <li><a class="statename" id="Mississippi" href="#">Mississippi</a></li>
+          <li><a class="statename" id="Missouri" href="#">Missouri</a></li>
+          <li><a class="statename" id="Montana" href="#">Montana</a></li>
+          <li><a class="statename" id="Nebraska" href="#">Nebraska</a></li>
+          <li><a class="statename" id="Nevada" href="#">Nevada</a></li>
+          <li><a class="statename" id="New Hampshire" href="#">New Hampshire</a></li>
+          <li><a class="statename" id="New Jersey" href="#">New Jersey</a></li>
+          <li><a class="statename" id="New Mexico" href="#">New Mexico</a></li>
+          <li><a class="statename" id="New York" href="#">New York</a></li>
+          <li><a class="statename" id="North Carolina" href="#">North Carolina</a></li>
+          <li><a class="statename" id="North Dakota" href="#">North Dakota</a></li>
+          <li><a class="statename" id="Ohio" href="#">Ohio</a></li>
+          <li><a class="statename" id="Oklahoma" href="#">Oklahoma</a></li>
+          <li><a class="statename" id="Oregon" href="#">Oregon</a></li>
+          <li><a class="statename" id="Pennsylvania" href="#">Pennsylvania</a></li>
+          <li><a class="statename" id="Rhode Island" href="#">Rhode Island</a></li>
+          <li><a class="statename" id="South Carolina" href="#">South Carolina </a></li>
+          <li><a class="statename" id="South Dakota" href="#">South Dakota</a></li>
+          <li><a class="statename" id="Tennessee" href="#">Tennessee</a></li>
+          <li><a class="statename" id="Texas" href="#">Texas</a></li>
+          <li><a class="statename" id="Utah" href="#">Utah</a></li>
+          <li><a class="statename" id="Vermont" href="#">Vermont</a></li>
+          <li><a class="statename" id="Virginia" href="#">Virginia</a></li>
+          <li><a class="statename" id="Washington" href="#">Washington</a></li>
+          <li><a class="statename" id="West Virginia" href="#">West Virginia</a></li>
+          <li><a class="statename" id="Wisconsin" href="#">Wisconsin</a></li>
+          <li><a class="statename" id="Wyoming" href="#">Wyoming</a></li>
         </ul>
       </div>
 
+
+
       <p id="addpadd">*Percentages for "Rape" category reflect the combined values for legacy and revised definitions of rape. See <a href="index.html#definitions">Disclaimers</a> for further explanation.</p>
+      <p>**No data was provided for Hawaii or Idaho.</p>
 
     </div>
 
     <div id="right">
       <div id="container" style="width: 100%; height: 400px;"></div>
-      <p>
-        <!--check if highcharts has z index? floats? etc-->
-
-
-        <!--put the same info as earlier in here! also make it invisible before you click, a la trollhouse-->
     </div>
 
   </div>
@@ -108,18 +105,37 @@
 
   <script type="text/javascript">
   $(document).ready(function() {
-    //setting up temporary variables for this exmaple
-    var stateName;
-    var rapeStat;
-    var robbStat;
-    var burgStat;
-    var propStat;
-    var aggrStat;
-    var murdStat;
-    var arsoStat;
-    var larcStat;
-    var motoStat;
-    var violStat;
+
+var theState;
+var rapeStat;
+var robbStat;
+var burgStat;
+var propStat;
+var aggrStat;
+var murdStat;
+var arsoStat;
+var larcStat;
+var motoStat;
+var violStat;
+
+
+  $("#stateList").on("click", ".statename", function(){
+    theState = $(this).attr("id");
+    rapeStat = crimes[theState].rape;
+    robbStat = crimes[theState].robb;
+    burgStat = crimes[theState].burg;
+    propStat = crimes[theState].prop;
+    aggrStat = crimes[theState].aggr;
+    murdStat = crimes[theState].murd;
+    arsoStat = crimes[theState].arso;
+    larcStat = crimes[theState].larc;
+    motoStat = crimes[theState].moto;
+    violStat = crimes[theState].viol;
+    chartStart();
+  });
+
+
+
 
     var chartStart = function() {
 
@@ -144,7 +160,7 @@
           type: 'pie'
         },
         title: {
-          text: 'Breakdown of campus crime: ' + stateName
+          text: 'Breakdown of campus crime: ' + theState
         },
         tooltip: {
           pointFormat: '{series.name}: <b>{point.y}</b>'
@@ -202,44 +218,9 @@
           ]
         }]
       });
-    };
-    //
-
-
-    $('#Alabama').click(function() {
-      stateName = "Alabama";
-      rapeStat = 19;
-      robbStat = 12;
-      burgStat = 149;
-      propStat = 1621;
-      aggrStat = 46;
-      murdStat = 0;
-      arsoStat = 0;
-      larcStat = 1437;
-      motoStat = 35;
-      violStat = 77;
-      chartStart();
-
-    })
-    $('#Georgia').click(function() {
-      stateName = "Georgia";
-      rapeStat = 123;
-      arsoStat = 3;
-      robbStat = 39;
-      burgStat = 277;
-      propStat = 3508;
-      aggrStat = 31;
-      murdStat = 0;
-      larcStat = 3152;
-      motoStat = 79;
-      violStat = 193;
-      chartStart();
-
-    })
+      };
     });
 
-
-  // WORKS FINE WITH 2 STATES PLUGGED IN MANUALLY
 
     </script>
 
@@ -262,23 +243,20 @@ html {
   font-size: 1.2em;
 }
 
-
-/*  #small {
-    display: none;
-  }*/
-
 #addpadd {
   padding-top: 1em;
 }
 
+.nodata {
+  font-size: 1.2em;
+}
 
-/*try floating chart on top*/
 
 @media (min-width:1000px) {
   #left {
     float: left;
     width: 40%;
-    position: fixed;
+
   }
   #right {
     float: right;
