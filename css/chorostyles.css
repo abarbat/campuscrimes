@@ -46,10 +46,12 @@
 }
 
 #map {
-  height: 620px; /*change smaller with media query*/
-  max-width: 100%;
+  height: 620px;
+  width: 100%;
+  /*min-width: 750px;*/
   margin: 0 auto;
 }
+
 
 @media (max-width: 320px) {
   #map {height: 560px}

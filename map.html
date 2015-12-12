@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <link rel="shortcut icon" href="images/icon.gif">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
@@ -17,20 +17,17 @@
     <ul class="nav nav-tabs">
       <li><a href="index.html">About</a></li>
       <li class="active"><a href="map.html">Map</a></li>
-      <li><a href="states.html">States</a></li> <!--this will be the jQuery page. might change name of tab and page-->
+      <li><a href="states.html">States</a></li> <!--FIX LINKS IN TABS-->
 
     </ul>
   <div class="row col-md-12">
     <h1>Map</h1>
-    <p><span id="campus">632 campuses.</span> <span id="student">8,256,028 students.</span> <span id="crime">150,124 crimes.</span> <span id="where">See where they are.</span></p>
-    <p id="final">Click a state to see its schools. Click a marker to see individual statistics.</p>
-
-      <!--idea: put all in own divs and width =  same as text. align left, fade in after each thing finishes fading in? see https://api.jquery.com/delay/-->
-<!--j query ideas: ​make page roll/slide out ​of tabs when you click on it; maybe an animation of exceptional states (3 highest, 3 lowest, maybe indiv schools too) on about page or st-->
+    <p>632 campuses. 8,256,028 students. 150,124 crimes. See where they are.</p>
+    <p>Click a state to see its schools. Click a marker to see individual statistics.</p>
 
   </div>
   <div class="row col-md-12 col-lg-12">
-    <div id="map"></div>
+    <div id="mobilecontain"><div id="map"></div></div>
   </div>
 
 
@@ -44,6 +41,7 @@
     worldCopyJump: true,
   }).setView([37.8, -96], 4);
 
+
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 maxZoom: 18,
@@ -56,7 +54,7 @@ accessToken: 'pk.eyJ1IjoiYWJhcmJhdCIsImEiOiJjaWgzbnMxejMweTkwd2NtNTA1bW93enZ6In0
 var markerIcon = L.icon({
     iconUrl: 'images/marker.png',
 
-    iconSize:     [20, 30], // size of the icon
+    iconSize:     [20, 30],
 });
 
 
@@ -133,7 +131,7 @@ info.onAdd = function (map) {
 
 info.update = function (props) {
   this._div.innerHTML = '<h4>Campus Crime</h4>' +  (props ?
-      '<h3><center>' + props.state + '</center></h3><p class="popup">' + props.numberCrimes + ' crimes</p><p class="popup">' + props.numberStudents + ' students</p><p class="popup">' + props.crimePer1000 + ' crimes/1000 students' : 'Hover over a state</p>');
+      '<h3><center>' + props.state + '</center></h3><p class="popup">' + props.numberCrimes + ' crimes</p><p class="popup">' + props.numberStudents + ' students</p><p class="popup">' + props.crimePer1000 + ' crimes/1,000 students' : 'Hover over a state</p>');
 };
 
 info.addTo(map);
